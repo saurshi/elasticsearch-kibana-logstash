@@ -1,4 +1,6 @@
-# elasticsearch+kibana+logstash # По заданию на вакансию в ИСА (ООО "Информационные системы и аутсорсинг")
+# elasticsearch-kibana-logstash-winlobeat
+
+* По заданию на вакансию в ИСА (ООО "Информационные системы и аутсорсинг")
 
 **ELASTIC (ELK) STACK**
 
