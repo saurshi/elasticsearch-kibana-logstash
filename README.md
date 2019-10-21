@@ -1,4 +1,4 @@
-# elasticsearch-kibana-logstash-winlobeat
+# elasticsearch-kibana-logstash-winlogbeat
 
 * По заданию на вакансию в ИСА (ООО "Информационные системы и аутсорсинг")
 
