@@ -20,7 +20,7 @@
 2. В процессе экспериментов выяснилось, что ELK плохо дружит с новейшей версией OpenJDK Java
    - поставил Oracle Java Runtime Environment из AUR.
 
-3. Настройка хорошо задукоментирована на [официальном сайте](https://www.elastic.co/guide/index.html).
+3. Настройка хорошо задокументирована на [официальном сайте](https://www.elastic.co/guide/index.html).
 
 ### Creating
 
@@ -41,6 +41,36 @@
 В целом интересная система мониторинга, но пригодна имхо только для анализа. 
 
 Не предусмотрено алертов и оперативного оповещения без сторонних модулей. Еще хочется отметить прожорливость Java на ресурсы процессора и памяти, хотя работает все бодро, правда и нагрузки нет.
+
+### Modification
+
+Нужно сделать так, чтобы Logstash парсил лог через фильтр.
+
+1. Для этого подключаем grok filter plugin например так:
+
+    input {
+      file {
+        path => "/var/log/logstash/input/*.log"
+      }
+    }
+    filter {
+      grok {
+        match => { "message" => "%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}" }
+      }
+    }
+* see etc/logstash/vnet-example.conf
+
+2. Беда в том, что у меня не получилось на хосте запустить ELK и Logstash на одной версии JAVA VM!
+
+Logstash крашился на Java/latest, а ELK не запускался на jre8.u222-2, на котором работал первый.:-(
+
+Пришлось Logstash запускать в контейнере docker.elastic.co/logstash и вязать с ELK на хосте.
+
+Еще тот гемор, т.к. контейнер неразборный. В итоге не получилось протестировать реальный вывод после парсинга grok`ом.
+
+На docker-compose у меня пока не дошли руки из-за нехватки времени и technical limitations of the host (ssd60Gb).
+
+3. Но я принципиально это сделаю позже.
 
 ## Built With
 
