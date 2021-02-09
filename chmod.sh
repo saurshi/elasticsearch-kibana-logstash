@@ -1,7 +1,5 @@
 #!/bin/bash
-user=saur
-group=users
-dir=/media/ssd28/saur/Flash/
+dir=$PWD
 
 chown -R $user:$group "$dir";
 find "$dir" -type d -exec chmod 755 '{}' \;
