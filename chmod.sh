@@ -1,8 +1,6 @@
 #!/bin/bash
-user=saur
-group=users
-dir=/media/ssd28/saur/Flash/
+dir=$PWD
 
-chown -R $user:$group "$dir";
+chown -R  "$dir";
 find "$dir" -type d -exec chmod 755 '{}' \;
 find "$dir" -type f -exec chmod 644 '{}' \;
